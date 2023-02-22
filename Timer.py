@@ -8,6 +8,8 @@ beep_sound = AudioSegment.from_wav("./beep.wav")
 bell_sound = AudioSegment.from_wav("./bell.wav")
 
 def play_beep():
+    interval = random.randint(300, 600)
+    time.sleep(interval)
     play(beep_sound)
 
 def play_bell():
@@ -36,9 +38,8 @@ class Timer:
 
 def main():
     # Play initial test sounds
-    play_beep()
-    time.sleep(1)
-    play_bell()
+    threading.Thread(target=play_beep).start()
+    threading.Thread(target=play_bell).start()
     time.sleep(1)
 
     beep_timer = Timer(300, play_beep)  # 5 minutes
